@@ -1,0 +1,38 @@
+/* ======================
+  MAIN STYLES
+  ====================== */
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+    background-color: #f09101;
+}
+
+/* ======================
+  HEADER STYLES
+  ====================== */
+
+header {
+  display: flex;
+  min-height: 80px;
+  background-color: white;
+  z-index: 10;
+}
+
+header img {
+  max-height: 80px;
+  margin-left: 20px;
+  width: auto;
+}
+
+header input[type=text] {
+  max-height: 24px;
+  padding: 8px;
+  border-style: solid;
+  border-color: #f09101;
+  border-width: 3px;
+  border-radius: 5px;
+  font-size: 17px;
+}
