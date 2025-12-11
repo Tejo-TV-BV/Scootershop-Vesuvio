@@ -8,6 +8,7 @@ if (isset($_POST["register"])) {
     $contact_nr =$_POST["contact"];
     $email = $_POST["email"];
     $ww = $_POST["ww"];
+    $role = 1;
 
     // include de database connectie en de functies file.
     require_once '../../config/DB_connect.php';
@@ -31,7 +32,7 @@ if (isset($_POST["register"])) {
         exit();
     }
 
-    createUser($conn, $naam, $achternaam, $contact_nr, $email, $ww);
+    createUser($conn, $naam, $achternaam, $contact_nr, $email, $ww, $role);
 
 } else {
     // stuurt persoon terug als er niks te doen is op deze pagina.

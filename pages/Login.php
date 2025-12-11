@@ -27,6 +27,9 @@ if(isset($_GET["error"])) {
     } else if ($_GET["error"] == "uitgelogd") {
         $form_error = "form-container-error2";
         $error_txt = "<p class='error-text2'> Je bent succesvol uitgelogd! </p>";
+    } else if ($_GET["error"] == "noRole") {
+        $form_error = "form-container-error";
+        $error_txt = "<p class='error-text'> Je hebt geen rol, vraag een admin voor hulp! </p>";
     } else if ($_GET["error"] == "none") {
         $form_error = "form-container-error2";
         $error_txt = "<p class='error-text2'> Account succesvol aangemaakt, log nu in! </p>";

@@ -61,12 +61,12 @@ if(isset($_GET["error"])) {
             <div class="name-row">
                 <div class="input-group">
                     <label>Voornaam:</label>
-                    <input type="text" name="voornaam" placeholder="Vul je voornaam in" minlength="2" maxlength="30" required />
+                    <input type="text" name="voornaam" placeholder="Vul je voornaam in" minlength="2" maxlength="30" pattern="^[A-Z].*" required />
                 </div>
 
                 <div class="input-group">
                     <label>Achternaam:</label>
-                    <input type="text" name="achternaam" placeholder="Vul je achternaam in" minlength="2" maxlength="30" required />
+                    <input type="text" name="achternaam" placeholder="Vul je achternaam in" minlength="2" maxlength="30" pattern="^[A-Z].*" required />
                 </div>
             </div>
 
@@ -74,7 +74,7 @@ if(isset($_GET["error"])) {
             <div class="contact-row">
                 <div class="input-group">
                     <label>Telefoonnummer:</label>
-                    <input type="text" name="contact" placeholder="Vul je telefoonnummer in" minlength="10" maxlength="15" pattern="[0-9]{10,15}" required />
+                    <input type="text" name="contact" placeholder="Vul je telefoonnummer in" minlength="10" maxlength="15"  required />
                 </div>
 
                 <div class="input-group">

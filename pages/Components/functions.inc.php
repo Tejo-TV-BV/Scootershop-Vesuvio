@@ -45,8 +45,8 @@ function emailExists($conn, $email) {
     mysqli_stmt_close($stmt);
 }
 
-function createUser($conn, $naam, $achternaam, $contact_nr, $email, $ww) {
-    $sql = "INSERT INTO user (F_name, L_name, contact_nr, email, password) VALUES (?, ?, ?, ?, ?);";
+function createUser($conn, $naam, $achternaam, $contact_nr, $email, $ww, $role) {
+    $sql = "INSERT INTO user (F_name, L_name, contact_nr, email, password, role) VALUES (?, ?, ?, ?, ?, ?);";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         echo "<script>window.location.href = '../register.php?error=stmtfailed';</script>";
@@ -55,7 +55,7 @@ function createUser($conn, $naam, $achternaam, $contact_nr, $email, $ww) {
 
     $db_ww = hash('sha256', $ww);
 
-    mysqli_stmt_bind_param($stmt, "sssss", $naam, $achternaam, $contact_nr, $email, $db_ww);
+    mysqli_stmt_bind_param($stmt, "ssssss", $naam, $achternaam, $contact_nr, $email, $db_ww, $role);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
     echo "<script>window.location.href = '../login.php?error=none';</script>";
@@ -92,9 +92,20 @@ function loginUser($conn, $email, $ww) {
         echo "<script>window.location.href = '../login.php?error=wrongLogin';</script>";
         exit();
     } else if ($wwChecker === true) {
-        session_start();
-        $_SESSION["userid"] = $emailExists["ID"];
-        echo "<script>window.location.href = '../account.php?error=none';</script>";
-        exit();
+        if ($emailExists["role"] == 1) {
+            session_start();
+            $_SESSION["userid"] = $emailExists["ID"];
+            echo "<script>window.location.href = '../winkelwagen.php?error=none';</script>";
+            exit();
+        } else if ($emailExists["role"] == 2) {
+            session_start();
+            $_SESSION["userid"] = $emailExists["ID"];
+            echo "<script>window.location.href = '../admin-account.php?error=none';</script>";
+            exit();
+        } else {
+            echo "<script>window.location.href = '../login.php?error=noRole';</script>";
+            exit();
+        }
+
     }
 }
