@@ -4,8 +4,8 @@
 // Naam script		  : logout.inc.php
 // Omschrijving		  : Op deze pagina wordt de user uitgelogd
 // Naam ontwikkelaar  : Tejo Veldman
-// Project		      : Energie Transitie
-// Datum		      : projectweek - periode 4 - 2025
+// Project		    : Scootershop-Vesuvio
+// Datum		    : OefenExamen - periode 2 - 2025
 //---------------------------------------------------------------------------------------------------//
 session_start();
 session_unset();

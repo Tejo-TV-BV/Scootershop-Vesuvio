@@ -1,38 +1,454 @@
 /* ======================
   MAIN STYLES
-  ====================== */
+====================== */
 * {
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
 }
 
 body {
     background-color: #f09101;
+    font-family: Arial, sans-serif;
+    height: 100vh;
 }
 
 /* ======================
   HEADER STYLES
-  ====================== */
+====================== */
 
 header {
   display: flex;
-  min-height: 80px;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 2vh 20px;
   background-color: white;
   z-index: 10;
 }
 
+/* Logo */
 header img {
-  max-height: 80px;
-  margin-left: 20px;
+  height: 60px;
   width: auto;
 }
 
+/* Search bar */
 header input[type=text] {
-  max-height: 24px;
-  padding: 8px;
-  border-style: solid;
-  border-color: #f09101;
-  border-width: 3px;
-  border-radius: 5px;
-  font-size: 17px;
+  flex: 1;
+  max-width: 500px;
+  height: 40px;
+
+  padding: 0 12px;
+  border: 2px solid #f09101;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+  transition: 0.2s;
+}
+
+header input[type=text]:focus {
+  border-color: #c87400;
+}
+
+/* Icon menu */
+header nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+header nav a {
+  font-size: 32px;
+  color: #333;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+header nav a:hover {
+  color: #f09101;
+}
+
+/* ======================
+  HOMEPAGE STYLES
+====================== */
+
+.items {
+  background-color: #333;
+  margin: 5%;
+  padding: 20px;
+  min-height: 400px;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+
+  border-radius: 16px;
+}
+
+/* Product cards */
+.item-card {
+  background: #fff;
+  border-radius: 16px;
+  text-align: center;
+  padding: 30px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+
+  color: #222;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.item-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.35);
+}
+
+/* Afbeelding */
+.item-card img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  margin-bottom: 20px;
+}
+
+/* Naam */
+.item-name {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+/* Prijs */
+.item-price {
+  font-size: 18px;
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+/* Button */
+.add-btn {
+  margin-top: auto;
+  background: #f09101;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.add-btn:hover {
+  background: #005fcc;
+}
+
+/* ======================
+  INFO PAGE STYLES
+====================== */
+
+.info-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+.info-container h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #f09101;
+}
+
+.info-container p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+    color: #222;
+}
+
+.info-container img {
+    width: 100%;
+    max-width: 800px;
+    border-radius: 12px;
+    margin: 20px auto; 
+    display: block; 
+}
+
+/* ======================
+  WINKELWAGEN STYLES
+====================== */
+
+.winkelwagen-pagina {
+    display: flex;
+    gap: 20px;
+
+    height: calc(100vh - 100px);
+    padding: 20px;
+
+    background-color: #f09101;
+    overflow: hidden;
+}
+
+.winkelwagen-items {
+    flex: 3;
+    background-color: #333;
+    border-radius: 12px;
+    padding: 20px;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+
+    overflow-y: auto;
+}
+
+.winkelwagen-items h1 {
+  color: white;
+}
+
+.winkelwagen-totaal {
+    flex: 1;
+    background-color: white;
+    border-radius: 12px;
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+/* ======================
+      LOGIN/REGISTER STYLES
+====================== */
+
+.login-box {
+    height: calc(100vh - 120px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-container {
+    background: #fff;
+    padding: 45px 35px;
+    width: 450px;
+    border-radius: 16px;
+    border: 2px solid #6d4100;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+.form-container-error {
+    background: #fff;
+    padding: 45px 35px;
+    width: 450px;
+    border-radius: 16px;
+    border: 2px solid #6d4100;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    text-align: center;
+    animation: errorShake 0.6s ease forwards;
+}
+
+.form-container-error2 {
+    background: #fff;
+    padding: 45px 35px;
+    width: 450px;
+    border-radius: 16px;
+    border: 2px solid #6d4100;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    text-align: center;
+    animation: errorShake2 1s ease forwards;
+}
+
+@keyframes errorShake {
+    0% {
+        border-color: #f09101;
+        transform: translateX(0);
+    }
+    20% {
+        border-color: #ff0026;
+        transform: translateX(-5px);
+    }
+    40% {
+        border-color: #ff0026;
+        transform: translateX(5px);
+    }
+    60% {
+        border-color: #ff0026;
+        transform: translateX(-5px);
+    }
+    80% {
+        border-color: #ff0026;
+        transform: translateX(5px);
+    }
+    100% {
+        border-color: #f09101;
+        transform: translateX(0);
+    }
+}
+
+@keyframes errorShake2 {
+    0% {
+        transform: scale(1);
+        border-color: #f09101;
+        opacity: 1;
+    }
+    20% {
+        transform: scale(1.05);
+        border-color: #10bd0d;
+    }
+    50% {
+        transform: scale(1);
+        border-color: #10bd0d;
+    }
+    80% {
+        transform: scale(1);
+        border-color: #10bd0d;
+    }
+    100% {
+        transform: scale(1);
+        border-color: #f09101;
+    }
+}
+
+.form-container h2 {
+    margin-bottom: 30px;
+    color: #f09101;
+    font-size: 28px;
+}
+
+.input-group {
+    text-align: left;
+    margin-bottom: 18px;
+}
+
+.input-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    font-size: 15px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-group input:focus {
+    border-color: #f09101;
+    box-shadow: 0 0 8px rgba(240,145,1,0.3);
+    outline: none;
+}
+
+.name-row,
+.contact-row {
+    display: flex;
+    gap: 15px;
+}
+
+.small-text,
+.back-link {
+    text-align: left;
+    font-size: 14px;
+    margin: 12px 0;
+}
+
+.small-text a,
+.back-link {
+    color: #f09101;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.small-text a:hover,
+.back-link:hover {
+    text-decoration: underline;
+}
+
+.error-text {
+    color: #ff0026;
+    font-weight: 600;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
+    opacity: 0;
+    animation: showError 0.6s ease forwards;
+}
+
+.error-text2 {
+    color: #10bd0d;
+    font-weight: 600;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
+    opacity: 0;
+    animation: showError2 2s forwards;
+}
+
+@keyframes showError {
+    0% { opacity: 0; transform: translateY(-5px); }
+    50% { opacity: 1; transform: translateY(2px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes showError2 {
+    0% { opacity: 0; transform: translateY(-5px); }
+    50% { opacity: 1; transform: translateY(2px); }
+    80% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; }
+}
+
+/* BUTTON STYLES */
+
+.register-btn,
+.login-btn {
+    width: 100%;
+    padding: 14px;
+    background: #f09101;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: background 0.2s ease;
+}
+
+.register-btn:hover,
+.login-btn:hover {
+    background: #c87400;
+}
+
+.button-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.reset-btn {
+    padding: 10px 16px;
+    background: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    width: 110px;
+    transition: background 0.2s ease;
+}
+
+.reset-btn:hover {
+    background: #5a6268;
 }

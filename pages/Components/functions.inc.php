@@ -1,5 +1,16 @@
 <?php
 
+// Check of de variable leeg zijn
+function emptyInputRegister($naam, $achternaam, $contact_nr, $email, $ww) {
+    $result;
+    if(empty($naam) || empty($achternaam) || empty($contact_nr) || empty($email) || empty($ww)){
+        $result = true;
+    } else {
+        $result = false;
+    }
+    return $result;
+}
+
 // Check of de layout email klopt
 function invalidEmail($email) {
     $result;
@@ -11,21 +22,11 @@ function invalidEmail($email) {
     return $result;
 }
 
-function wwMatch($ww, $wwrepeat) {
-    $result;
-    if($ww !== $wwrepeat){
-        $result = true;
-    } else {
-        $result = false;
-    }
-    return $result;
-}
-
 function emailExists($conn, $email) {
     $sql = "SELECT * FROM user WHERE email = ?;";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
-        echo "<script>window.location.href = '../login.php?error=stmtfailed';</script>";
+        echo "<script>window.location.href = '../register.php?error=stmtfailed';</script>";
         exit();
     }
 
@@ -44,6 +45,22 @@ function emailExists($conn, $email) {
     mysqli_stmt_close($stmt);
 }
 
+function createUser($conn, $naam, $achternaam, $contact_nr, $email, $ww) {
+    $sql = "INSERT INTO user (F_name, L_name, contact_nr, email, password) VALUES (?, ?, ?, ?, ?);";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        echo "<script>window.location.href = '../register.php?error=stmtfailed';</script>";
+        exit();
+    }
+
+    $db_ww = hash('sha256', $ww);
+
+    mysqli_stmt_bind_param($stmt, "sssss", $naam, $achternaam, $contact_nr, $email, $db_ww);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    echo "<script>window.location.href = '../login.php?error=none';</script>";
+    exit();
+}
 
 function emptyInputLogin($email, $ww) {
     $result;
@@ -63,7 +80,7 @@ function loginUser($conn, $email, $ww) {
         exit();
     }
 
-    $db_ww = $emailExists["wachtwoord"];
+    $db_ww = $emailExists["password"];
     $wwHashed = hash('sha256', $ww);
     if($db_ww === $wwHashed) {
         $wwChecker = true;
@@ -77,17 +94,7 @@ function loginUser($conn, $email, $ww) {
     } else if ($wwChecker === true) {
         session_start();
         $_SESSION["userid"] = $emailExists["ID"];
-        if ($emailExists["rol"] == "user"){
-            session_start();
-            $_SESSION["userRole"] = "user";
-            echo "<script>window.location.href = '../user-pages/account-user.php?error=none';</script>";
-        } else if ($emailExists["rol"] == "admin"){
-            session_start();
-            $_SESSION["userRole"] = "admin";
-            echo "<script>window.location.href = '../admin-pages/account-admin.php?error=none';</script>";
-        } else {
-            echo "<script>window.location.href = '../login.php?error=stmtfailed';</script>";
-        }
+        echo "<script>window.location.href = '../account.php?error=none';</script>";
         exit();
     }
 }
